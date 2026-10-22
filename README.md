@@ -2,7 +2,7 @@
 
 **MediaPipe + HaGRIDv2-landmark MLP + NumPy + Windows control + optional Handy dictation**
 
-웹캠 기반 비접촉 인터페이스로 Windows 포인터·클릭·스크롤·텍스트 편집·미디어 조작을 제어하는 개인 개발 프로젝트입니다. STEP 1부터 STEP 19까지 인식과 상호작용을 개선하고, 현재는 다른 PC에서도 설치할 수 있도록 Windows EXE 배포를 준비하고 있습니다.
+웹캠 기반 비접촉 인터페이스로 Windows 포인터·클릭·스크롤·텍스트 편집·미디어 조작을 제어하는 팀 개발 프로젝트입니다. STEP 1부터 STEP 19까지 인식과 상호작용을 개선하고, 현재는 다른 PC에서도 설치할 수 있도록 Windows EXE 배포를 준비하고 있습니다.
 
 > **현재 배포 상태 (2026-10-22):** STEP 19 최종 Python **소스코드**와 v5 Windows **EXE 빌드 소스**가 공개되어 있습니다. GitHub Actions에서 빌드된 Windows EXE의 실제 설치·실기 검증이 완료됐다는 의미는 아닙니다. `Code → Download ZIP`은 **소스 ZIP**입니다.
 
