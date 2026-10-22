@@ -1,0 +1,10 @@
+# Dependencies installed ONLY on the Windows build runner, not user PCs.
+# Torch is intentionally absent; the released runtime uses NumPy for MLP inference.
+mediapipe==0.10.32
+numpy>=1.26,<3
+opencv-python>=4.10,<5
+pyautogui==0.9.54
+uiautomation>=2,<3
+pycaw==20240210
+comtypes>=1.4,<2
+pyinstaller>=6.10,<7

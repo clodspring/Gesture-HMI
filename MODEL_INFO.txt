@@ -1,0 +1,7 @@
+STEP 19 Windows user release (v4)
+Runtime MLP: models_v2/gesture_mlp_v2.npz (NumPy inference)
+Network: 42 -> 64 -> 32 -> 4; classes peace, one, stop, no_gesture
+Checkpoint trained best_epoch=51 (prior v3b model conversion)
+PyTorch checkpoint deliberately NOT shipped in this runtime source.
+Bundled Windows EXE will include numpy MLP and official MediaPipe hand_landmarker.task.
+NumPy model SHA256 = 9140aff98cac7731d29b03c7856f66b0fc8ec89eff984485cc313622c6d7b3f5
