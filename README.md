@@ -1,46 +1,66 @@
-# Gesture HMI v5 — Windows 로컬 원클릭 빌드·설치
+# Gesture HMI — Hand Gesture Control for Windows
 
-**일반 사용자용 Windows EXE는 Python, Conda, PyTorch 없이 실행됩니다.**
+**MediaPipe + HaGRIDv2-landmark MLP + NumPy + Windows control + optional Handy dictation**
 
-이 프로젝트는 기존 STEP 19 제스처·음성 로직과 NumPy MLP 모델을 보존하면서, **GitHub에 업로드하지 않고 Windows 노트북에서 배포용 EXE를 만드는 소스 패키지**입니다.
+웹캠 기반 비접촉 인터페이스로 Windows 포인터·클릭·스크롤·텍스트 편집·미디어 조작을 제어하는 개인 개발 프로젝트입니다. STEP 1부터 STEP 19까지 인식과 상호작용을 개선하고, 현재는 다른 PC에서도 설치할 수 있도록 Windows EXE 배포를 준비하고 있습니다.
 
-## 내 노트북에서 처음 설치하기
+> **현재 배포 상태 (2026-10-22):** STEP 19 최종 Python **소스코드**와 v5 Windows **EXE 빌드 소스**가 공개되어 있습니다. GitHub Actions에서 빌드된 Windows EXE의 실제 설치·실기 검증이 완료됐다는 의미는 아닙니다. `Code → Download ZIP`은 **소스 ZIP**입니다.
 
-1. 이 ZIP을 `압축 풀기`로 완전히 해제합니다. ZIP 미리보기 내부에서 BAT를 실행하지 마세요.
-2. 폴더 맨 위에 있는 **`Install_Gesture_HMI.bat`**를 더블클릭합니다.
-3. 첫 실행에만 인터넷으로 **빌드 전용 Python 3.12.10**, 라이브러리, MediaPipe 손 모델을 다운로드합니다. 기존 Conda 환경을 사용하거나 변경하지 않습니다.
-4. 소스 검증 → PyInstaller EXE 생성 → EXE 모델 검증 → 설치까지 자동 진행합니다.
-5. 성공하면 바탕화면 **Gesture HMI** 바로가기로 실행합니다.
+## 바로가기
 
-별도로 Build, Test Camera, Link Conda를 실행할 필요가 없습니다. 처음부터 `Start_Gesture_HMI.bat`를 누르더라도 EXE가 없다면 빌드와 설치로 연결되도록 했습니다.
-
-## 파일 역할
-
-| 파일 | 동작 |
+| 문서 / 코드 | 내용 |
 |---|---|
-| `Install_Gesture_HMI.bat` | **권장**: EXE가 없으면 로컬 빌드부터 자동 실행한 뒤 설치 |
-| `Start_Gesture_HMI.bat` | EXE 실행. EXE가 없고 소스만 있을 때 설치기로 안내·연결 |
-| `Build_Windows_EXE.bat` | 개발자용: 설치 없이 Windows EXE 및 배포 ZIP만 생성 |
-| `packaging/Build_Windows_EXE.bat` | 위 빌드 BAT와 동일하게 작동하는 호환 진입점 |
-| `release/Install_Gesture_HMI.ps1` | 생성된 EXE를 사용자별 설치 위치로 복사·진단·바로가기 생성 |
+| **[개발 과정: STEP 1~19](docs/DEVELOPMENT_HISTORY.md)** | 단계별 개발 이력, 문제와 개선, 모델 성능, Windows 배포까지의 변천 |
+| **[STEP 19 최종 코드 설명](docs/STEP19_FINAL_CODE.md)** | 기능별 구현 방식, 파일 구조, NumPy 추론, 실행 및 진단, 배포 상태 |
+| **[STEP 19 전체 Python 소스](gesture_pointer_step19_v3b_portable.py)** | 실제 실행 로직을 포함한 5,194줄 코드; GitHub에서 직접 열람 가능 |
+| [MLP v2 가중치](models_v2/gesture_mlp_v2.npz) | 학습된 NumPy 모델 |
+| [Windows 빌드·설치 안내](README_WINDOWS_INSTALL_KR.md) | 소스에서 EXE를 만드는 법과 사용자 설치 개요 |
+| [GitHub Actions Windows 빌드](.github/workflows/windows-release.yml) | Windows 빌드/진단/아티팩트 자동화 코드 |
 
-## 최종 생성되는 파일
+## 주요 기능
 
-- `dist\GestureHMI\GestureHMI.exe` — 로컬 테스트용 실행 파일
-- `GestureHMI_Windows_x64.zip` — 다른 사용자에게 **이 파일만** 전달
-- `%LOCALAPPDATA%\Programs\GestureHMI\GestureHMI.exe` — 사용자 PC에 설치된 프로그램
-- `%LOCALAPPDATA%\GestureHMI\logs\build_last.log` — 빌드 문제 진단 로그
-- `%LOCALAPPDATA%\GestureHMI\logs\app_last.log` — 실행 중 오류 진단 로그
+- **Hand tracking:** MediaPipe 21개 랜드마크
+- **AI 분류:** `42 → 64 → 32 → 4` MLP (`peace`, `one`, `stop`, `no_gesture`) 및 손동작 기하·시간 규칙
+- **Windows 제어:** 포인터, 클릭, 스크롤, 뒤로 가기, Enter, 텍스트 편집
+- **미디어 제어:** 원형 동작 재생/일시정지, Gun 동작 볼륨 및 좌우 ±10초 탐색
+- **한국어 받아쓰기:** Thumbs-up과 별도 Handy 프로그램 연동
+- **배포 개선:** 카메라 자동 탐색(0~4), NumPy 런타임으로 PyTorch 추론 의존성 제거
 
-최종 ZIP에는 설치 스크립트와 EXE 및 모델·DLL이 포함되며 **빌드 전용 Python 환경은 포함되지 않습니다.**
+손동작이 사라질 때의 입력 차단, 텍스트 편집 대상의 포커스 확인, 잘못된 반복 입력 방지 등 사용 안전성을 위한 상태 관리 로직도 포함되어 있습니다.
 
-## 중요 조건
+## 파일 구조
 
-- **빌드 PC**: Windows 10/11 **x64**, 인터넷, 다운로드·실행이 허용되는 보안 정책. 첫 설치 시 빌드 전용 Python과 pip 패키지 설치를 진행합니다.
-- **최종 사용자 PC**: Windows 10/11 x64, 웹캠, 해당 OS가 필요로 하는 시스템 런타임. Python/Conda/PyTorch는 필요 없습니다.
-- **Handy**: 음성입력만을 위한 선택적 외부 프로그램입니다. Handy가 없어도 나머지 손 제스처 기능은 실행되도록 설계되었습니다.
-- **개인정보**: 카메라 영상 전송 기능을 별도로 추가하지 않았습니다. 다만 설치·진단 로그에는 로컬 Windows 사용자 경로가 들어갈 수 있습니다.
-- **처음 시도에는 디스크 여유 공간이 필요합니다.** 빌드 라이브러리, MediaPipe 및 EXE 번들이 저장됩니다. 충분한 공간을 확보해 주세요.
-- PyInstaller가 실제 Windows에서 성공하는지는 이 환경에서 실행 검증을 할 수 없었습니다. 오류가 있다면 `build_last.log` 끝부분으로 원인을 특정할 수 있습니다.
+```text
+Gesture-HMI/
+├── .github/workflows/windows-release.yml
+├── docs/
+│   ├── DEVELOPMENT_HISTORY.md
+│   └── STEP19_FINAL_CODE.md
+├── models_v2/gesture_mlp_v2.npz
+├── packaging/Build_Windows_EXE.ps1
+├── release/Install_Gesture_HMI.ps1
+├── gesture_pointer_step19_v3b_portable.py
+├── requirements-windows.txt
+├── test_numpy_mlp.py
+├── test_portability.py
+├── test_distribution.py
+├── README_WINDOWS_INSTALL_KR.md
+└── README.md
+```
 
-자세한 절차는 [`README_WINDOWS_INSTALL_KR.md`](README_WINDOWS_INSTALL_KR.md) 참고.
+## Windows 사용자에게 안내할 내용
+
+**소스 ZIP과 실행파일 배포 ZIP은 다릅니다.** 실제 빌드가 성공한 Windows 패키지는 GitHub의 Actions 아티팩트 또는 검증 완료 후 Releases에 별도로 게시할 예정입니다. 일반 사용자용 배포 파일에는 `GestureHMI.exe`와 설치용 BAT가 있어야 합니다.
+
+Hands-free 제스처는 Windows PC의 웹캠 권한·보안정책에 영향을 받을 수 있으며, 한국어 음성 받아쓰기는 **Handy 외부 설치 및 Ctrl+Space 길게 누르기 설정**이 필요합니다.
+
+## 테스트 및 제한
+
+- 초기 랜드마크 MLP v1 정적 테스트 정확도는 **99.58%**로 기록되어 있으나, 실제 웹캠 전체 동작 성공률을 의미하지 않습니다.
+- 추론 경량화 시 별도 샘플 **1,500 / 1,500**에서 PyTorch와 NumPy의 예측 클래스가 일치했습니다.
+- 최종 STEP 19 소스에는 진단 및 회귀 테스트가 포함되어 있지만, 실제 배포 EXE·실물 카메라·다른 사용자 PC에서의 기능 검증은 별도입니다.
+- Windows 미디어 세션의 일부 조작은 선택적 WinRT 패키지에 영향을 받으며, 앱별 지원 차이가 있습니다.
+
+## 라이선스 및 외부 구성요소
+
+프로젝트 소스와 학습 가중치에 적용할 공개 라이선스, HaGRIDv2·MediaPipe 모델 및 Handy 관련 재배포 조건은 정식 배포 전에 확인해야 합니다. 이 저장소에 LICENSE 파일이 없다면 별도의 오픈소스 사용 권한이 자동으로 부여된 것은 아닙니다.
