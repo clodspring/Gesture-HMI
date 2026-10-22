@@ -6,6 +6,17 @@
 
 > **현재 배포 상태 (2026-10-22):** STEP 19 최종 Python **소스코드**와 v5 Windows **EXE 빌드 소스**가 공개되어 있습니다. GitHub Actions에서 빌드된 Windows EXE의 실제 설치·실기 검증이 완료됐다는 의미는 아닙니다. `Code → Download ZIP`은 **소스 ZIP**입니다.
 
+## Demo Video
+
+Watch Gesture HMI in action.
+
+Real-time hand gesture control for cursor movement,
+volume adjustment, voice-assisted search, and browser navigation.
+
+
+https://github.com/user-attachments/assets/ba776116-d439-4863-888b-a1ad2dfd836e
+
+
 ## 바로가기
 
 | 문서 / 코드 | 내용 |
