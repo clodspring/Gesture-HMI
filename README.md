@@ -16,6 +16,24 @@ volume adjustment, voice-assisted search, and browser navigation.
 
 https://github.com/user-attachments/assets/ba776116-d439-4863-888b-a1ad2dfd836e
 
+## User Feedback & Suggestions
+
+Gesture HMI는 사용자의 개인정보 보호를 중요하게 생각합니다.
+
+사용자 피드백을 위해 카메라 영상, 음성, 실행 로그를
+개발자에게 자동으로 전송하지 않습니다.
+
+사용 중 느낀 불편함이나 개선 아이디어가 있다면
+GitHub Discussions를 통해 자유롭게 의견을 남겨주세요.
+
+**[사용 후기 및 개선 제안 남기기](https://github.com/clodspring/Gesture-HMI/discussions)**
+
+- 사용 후기 및 개선 아이디어: Discussions
+- 오류 및 버그 제보: [GitHub Issues](https://github.com/clodspring/Gesture-HMI/issues)
+
+※ 피드백 작성에는 GitHub 로그인이 필요합니다.
+※ 공개 게시판이므로 개인정보나 민감한 자료는 첨부하지 마세요.
+※ Handy 등 외부 연동 프로그램의 데이터 처리 정책은 별도입니다.
 
 ## 바로가기
 
